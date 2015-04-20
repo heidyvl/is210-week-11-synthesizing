@@ -23,42 +23,44 @@ class ChessPiece(object):
                     temp = None
           return temp
           
-     def is_legal_move(self, position):
-          if self.algebraic_to_numeric(position) != None:
+     def is_legal_move(self, newposition):
+          if self.algebraic_to_numeric(newposition) != None:
                return True
           else:
                return False
 
-     def move(self, position):
-          if self.is_legal_move(position) is True:
-              newposition = position
-              moves.append((position, newposition, 5))
+     def move(self, newposition):
+          if self.is_legal_move(newposition) is True:
+              #newposition = position
+              moves.append((self.position, newposition, 5))
               return moves
           else:
               return False
 
-#piece = ChessPiece('a1', [])
+piece = ChessPiece('a1', [])
 #print piece.is_legal_move('b1')
 #print piece.move('a6')
 
 class Rook(ChessPiece):
      prefix = 'R'
      
-     def is_legal_move(self, position, newposition = 'b1'):
-          temp = self.algebraic_to_numeric(position)
+     def is_legal_move(self, newposition):
+          temp = self.algebraic_to_numeric(self.position)
           newtemp = self.algebraic_to_numeric(newposition) 
-          if (temp[0] == newtemp[0] or temp[1]==newtemp[1]) and (self.algebraic_to_numeric(position) != None):
+          if (temp[0] == newtemp[0] or temp[1]==newtemp[1]) and (self.algebraic_to_numeric(newposition) != None):
                return True
           else:
                return False
+#rook = Rook('a1', [])
+#print rook.move('h1')
 
 class Bishop(ChessPiece):
      prefix = 'B'
      
-     def is_legal_move(self, position, newposition = 'c3'):
-          temp = self.algebraic_to_numeric(position)
+     def is_legal_move(self, newposition):
+          temp = self.algebraic_to_numeric(self.position)
           newtemp = self.algebraic_to_numeric(newposition) 
-          if (int(temp[0])+ 1 == newtemp[0] and int(temp[1])+1==newtemp[1]) and (self.algebraic_to_numeric(position) != None):
+          if (int(temp[0])+ 1 == newtemp[0] and int(temp[1])+1==newtemp[1]) and (self.algebraic_to_numeric(newposition) != None):
                return True
           else:
                return False
@@ -68,15 +70,21 @@ class Bishop(ChessPiece):
 class King(ChessPiece):
      prefix = 'K'
      
-     def is_legal_move(self, position, newposition = 'b1'):
-          temp = self.algebraic_to_numeric(position)
+     def is_legal_move(self, newposition):
+          temp = self.algebraic_to_numeric(self.position)
           newtemp = self.algebraic_to_numeric(newposition) 
-          if ((newtemp[0]==int(temp[0])+1) or (newtemp[0]==int(temp[0])-1))or ((newtemp[1]==int(temp[1])+1) or (newtemp[1]==int(temp[1])-1)) and (self.algebraic_to_numeric(position) != None):
+          if ((newtemp[0]==int(temp[0])+1) or (newtemp[0]==int(temp[0])-1))or ((newtemp[1]==int(temp[1])+1) or (newtemp[1]==int(temp[1])-1)) and (self.algebraic_to_numeric(self.position) != None):
                return True
           else:
                return False     
 king = King('a1', [])
-print king.is_legal_move('a1')                                                                               
+print king.move('b1')
+
+class ChessMatch():
+     def __init__(self, pieces):
+          self.pieces = None
+          
+     
 
 
         
